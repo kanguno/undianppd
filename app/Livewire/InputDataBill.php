@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\wpdatas;
 use App\Models\Regs;
 use App\Models\Merchants;
+use Illuminate\Support\Str;
 class InputDataBill extends Component
 {
     use WithFileUploads;
@@ -34,6 +35,7 @@ class InputDataBill extends Component
     
     public function render()
     {
+        $this->dispatch('wire:load');
         return view('livewire.input-data-bill');
     }
     public function mount(){
@@ -161,10 +163,10 @@ class InputDataBill extends Component
 
         $data=wpdatas::where('nik',$this->nik)->first();
         if(empty($data)){
-        $nama=$this->nama;
-        $alamat=$this->alamat;
-        $nohp=$this->nohp;
-        $email=$this->email;
+        $nama=Str::upper($this->nama);
+        $alamat=Str::upper($this->alamat);
+        $nohp=Str::upper($this->nohp);
+        $email=Str::upper($this->email);
         $this->validate($this->rulesDataWp());
             wpdatas::create([
                 'nik' => $nik,
