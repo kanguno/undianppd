@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nm_merchant',100);
             $table->string('alm_merchant',150);
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 

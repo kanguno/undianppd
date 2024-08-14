@@ -16,8 +16,11 @@ return new class extends Migration
             $table->foreignId('nik')->constrained('wp_datas','nik')->onDelete('cascade');
             $table->foreignId('merchant_id')->constrained()->onDelete('cascade');
             $table->foreignId('status_id')->constrained()->onDelete('cascade');
-            $table->string('bill_img',100);
-            $table->string('qris_img',100);
+            $table->datetime('tgl_bill');
+            $table->string('bill_img',100)->nullable();
+            $table->date('created_at');
+            $table->date('updated_at');
+           // $table->string('qris_img',100);
         });
     }
 

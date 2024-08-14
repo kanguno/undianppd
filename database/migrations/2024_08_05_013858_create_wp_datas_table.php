@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('alm_wp',150);
             $table->string('no_hp',20);
             $table->string('email',50);
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 

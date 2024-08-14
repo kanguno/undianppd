@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('undians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('reg_id')->constrained()->onDelete('cascade');
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 

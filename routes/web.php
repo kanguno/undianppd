@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+//use App\Http\Controllers\RegUndianController;
+use App\Livewire\InputDataBill;
+use App\Livewire\ValidasiDataBill;
+use App\Livewire\RegDatas;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/inputdata', InputDataBill::class)->name('inputDataBill');;
+
+Route::get('/regdatas', RegDatas::class)->name('regdatas');;
 
 Route::middleware([
     'auth:sanctum',

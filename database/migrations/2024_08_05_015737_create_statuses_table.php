@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->string('reg_status',20);
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 
