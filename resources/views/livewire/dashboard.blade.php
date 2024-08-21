@@ -1,17 +1,9 @@
 <div class="p-10">
     <h1 class="font-bold text-2xl text-center">Data Undian Pajak Daerah Tahun 2024</h1>
 
-    <div wire:loading class="flex items-center justify-center overlay z-50 h-screen w-screen bg-black bg-opacity-50 fixed top-0 left-0">
-            <div class="absloute bg-light justify-content-center w-full h-full  position-fixed opacity-100 left-0 top-0 text-center translate-middle z-10">
-                <span class="flex justify-center items-center h-full" >
-                    <img class=" max-w-32 h-auto animate-bounce duration-[3000ms]" src="{{asset('storage/image/tubankab.png')}}" alt="">
-                </span>   
-            </div>         
-        </div>
+<x-loading/>
 
-
-   
-   <div class="flex w-8/12 mx-auto p-5 my-10 justify-between">
+    <div class="grid md:flex w-8/12 mx-auto p-5 my-10 justify-between">
         <div wire:click="regDatas(0)" class="flex mb-5 p-3 rounded-md shadow-lg hover:cursor-pointer">
             <div class="icon rounded-md bg-blue-600 text-white p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -76,5 +68,5 @@
             </div>
         </div>
 
-   </div>
+    </div>
 </div>

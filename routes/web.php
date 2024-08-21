@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\InputDataBill;
 use App\Livewire\ValidasiDataBill;
 use App\Livewire\RegDatas;
+use App\Livewire\Merchant;
 use App\Livewire\Dashboard;
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::middleware([
         
         Route::get('/dashboard', Dashboard::class)->name('dashboard');;
         Route::get('/regdatas', RegDatas::class)->name('regdatas');;
+        Route::get('/merchants', Merchant::class)->name('merchants');;
         Route::get('/regdatas/{statusid}', RegDatas::class)->name('regdatastatus');;
         Route::get('/validasidata/{regid}', ValidasiDataBill::class)->name('validasidata');;
     });

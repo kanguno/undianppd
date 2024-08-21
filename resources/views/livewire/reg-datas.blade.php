@@ -7,7 +7,7 @@
    
     <table class="my-10 mx-auto min-w-full rounded-md shadow-md bg-white">
         <tr >
-            <td class="flex justify-between">
+            <td class="flex justify-between border-2">
                 <!-- Radio buttons (hidden) -->
                 <input type="radio" class="hidden" id="tab1" wire:model.live="statusid" name="statusid" value="1">
                 <input type="radio" class="hidden" id="tab2" wire:model.live="statusid" name="statusid" value="3">
@@ -15,11 +15,11 @@
                 <input type="radio" class="hidden" id="tab4" wire:model.live="statusid" name="statusid" value="0">
 
                 <!-- Labels for radio buttons -->
-                <div class="flex items-end border">
-                    <label for="tab1" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '1' ? 'border-t-2 border-t-red-700 bg-white -mb-1 ' : 'border' }} transition-colors duration-300">Belum Divalidasi</label>
-                    <label for="tab2" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '3' ? 'border-t-2 border-t-red-700 bg-white -mb-1' : 'border' }} transition-colors duration-300">Diterima</label>
-                    <label for="tab3" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '4' ? 'border-t-2 border-t-red-700 bg-white -mb-1' : 'border' }} transition-colors duration-300">Ditolak</label>
-                    <label for="tab4" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '0' ? 'border-t-2 border-t-red-700 bg-white -mb-1' : 'border' }} transition-colors duration-300">Semua</label>
+                <div class="flex items-end">
+                    <label for="tab1" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '1' ? 'border-t-2 border-x-2 border-t-[#818cf8] rounded-t-lg  bg-white -mb-1 ' : '' }} transition-colors duration-300">Belum Divalidasi</label>
+                    <label for="tab2" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '3' ? 'border-t-2 border-x-2 border-t-[#818cf8] rounded-t-lg  bg-white -mb-1' : '' }} transition-colors duration-300">Diterima</label>
+                    <label for="tab3" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '4' ? 'border-t-2 border-x-2 border-t-[#818cf8] rounded-t-lg  bg-white -mb-1' : '' }} transition-colors duration-300">Ditolak</label>
+                    <label for="tab4" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '0' ? 'border-t-2 border-x-2 border-t-[#818cf8] rounded-t-lg  bg-white -mb-1' : '' }} transition-colors duration-300">Semua</label>
                 </div>
                 <div class="p-2 mr-2 grid float-end">
                     <div>

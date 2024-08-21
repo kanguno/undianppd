@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('merchants', function (Blueprint $table) {
             $table->id();
+            $table->string('device_id',10);
+            $table->string('nopd',20);
             $table->string('nm_merchant',100);
             $table->string('alm_merchant',150);
             $table->date('created_at');
