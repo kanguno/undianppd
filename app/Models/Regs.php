@@ -9,5 +9,5 @@ class Regs extends Model
 {
     use HasFactory;
     protected $table = 'regs';
-    protected $fillable = ['nik','merchant_id','tgl_bill','status_id','bill_img','qris_img'];
+    protected $fillable = ['nik','merchant_id','tgl_bill','status_id','bill_img','status_tappingbox','tappingbox_id','keterangan'];
 }

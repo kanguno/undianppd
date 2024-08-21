@@ -22,6 +22,7 @@
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+
         <div wire:loading class="flex items-center justify-center overlay z-50 h-screen w-screen bg-black bg-opacity-50 fixed top-0 left-0">
                 <div class="absolute bg-light justify-content-center w-full h-full position-fixed opacity-100 left-0 top-0 text-center translate-middle z-10">
                     <span class="flex justify-center items-center h-full">
@@ -29,9 +30,8 @@
                     </span>
                 </div>
             </div>
-
+            
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -66,7 +66,7 @@
                     'text-green-500': notificationType === 'success',
                     'text-red-500': notificationType === 'error',
                     'text-blue-500': notificationType === 'info'
-                }"
+                } "
                 class="relative bg-white text-center font-semibold rounded-2xl shadow-lg p-4 max-w-md mx-auto"
                 role="alert"
                 aria-live="assertive"
@@ -81,7 +81,7 @@
         </div>
     @endif
             <!-- Page Content -->
-            <main>
+            <main class="content">
                 {{ $slot }}
             </main>
         </div>

@@ -36,13 +36,15 @@ class InputDataBill extends Component
     public function render()
     {
         $this->dispatch('wire:load');
-        return view('livewire.input-data-bill');
+        \Log::info('Current NIK: ' . $this->nik); // Log data NIK
+        return view('livewire.input-data-bill')
+        ->extends('layouts.front');
     }
     public function mount(){
         $this->merchants=Merchants::All();
         //$this->notification="Uji Coba";
         //dd($this->merchants);
-        $this->setNotification('Isikan Data Anda dan Data Transaksi Anda dengan Sesuai','info');
+        // $this->setNotification('Isikan Data Anda dan Data Transaksi Anda dengan Sesuai','info');
     }
     public function rulesForNik()
     {

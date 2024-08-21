@@ -19,9 +19,9 @@
     </head>
     <body>
         <livewire:validasi-data-bill/>
-        @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
-
+        
     </body>
+    @livewireScripts
 </html>
 

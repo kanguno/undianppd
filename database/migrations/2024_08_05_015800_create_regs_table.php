@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('status_id')->constrained()->onDelete('cascade');
             $table->datetime('tgl_bill');
             $table->string('bill_img',100)->nullable();
+            $table->integer('status_tappingbox')->nullable();
+            $table->integer('tappingbox_id')->nullable();
+            $table->string('keterangan')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
            // $table->string('qris_img',100);

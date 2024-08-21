@@ -20,18 +20,33 @@
         <!-- Styles -->
         @livewireStyles
     </head>
+    
     <body class="font-sans antialiased">
-        <x-banner />
-        <div wire:loading class="flex items-center justify-center overlay z-50 h-screen w-screen bg-black bg-opacity-50 fixed top-0 left-0">
-                <div class="absolute bg-light justify-content-center w-full h-full position-fixed opacity-100 left-0 top-0 text-center translate-middle z-10">
-                    <span class="flex justify-center items-center h-full">
-                        <img class=" max-w-48 h-auto animate-bounce duration-[100000]" src="{{ asset('storage/image/isometrikppdwb.png') }}" alt="">
-                    </span>
-                </div>
+    <x-loading/>
+    <nav class=" bg-gradient-to-tr from-[#360855] to-[#400060] p-4">
+        <div class="container w-full mx-auto md:flex items-center justify-between">
+            <div class="flex w-full justify-between">
+                <a href="/" class="text-white text-xl font-bold flex align-middle">
+                    <img class=" max-w-6 " src="{{ asset('storage/image/tubankab.png') }}" alt="">
+                BPKPAD TUBAN</a>
+                <button id="menu-btn" class="text-white md:hidden focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
             </div>
+                <div id="menu" class="hidden md:flex">
+                <a href="/" class="text-white hover:cursor-pointer px-3 py-2 w-[max-content] rounded">Home</a>
+                <a href="/inputdata" class="text-white hover:cursor-pointer px-3 py-2 w-[max-content] rounded">Daftar Undian</a>
+            </div>
+        </div>
+    </nav>
+
+    
+
+        <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -66,7 +81,7 @@
                     'text-green-500': notificationType === 'success',
                     'text-red-500': notificationType === 'error',
                     'text-blue-500': notificationType === 'info'
-                }"
+                } "
                 class="relative bg-white text-center font-semibold rounded-2xl shadow-lg p-4 max-w-md mx-auto"
                 role="alert"
                 aria-live="assertive"
@@ -81,14 +96,21 @@
         </div>
     @endif
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="container-fluid">
+                @yield('content')
             </main>
         </div>
 
         @stack('modals')
 
-        
+        <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+
+        menuBtn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
     </body>
     @livewireScripts
 </html>
