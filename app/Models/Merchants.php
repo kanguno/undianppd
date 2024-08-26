@@ -9,5 +9,5 @@ class Merchants extends Model
 {
     use HasFactory;
     protected $table = 'merchants';
-    protected $fillable = ['id','nm_merchant','alm_merchant'];
+    protected $fillable = ['id','device_id','nopd','nm_merchant','alm_merchant'];
 }

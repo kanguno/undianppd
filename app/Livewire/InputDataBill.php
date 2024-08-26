@@ -8,6 +8,7 @@ use App\Models\wpdatas;
 use App\Models\Regs;
 use App\Models\Merchants;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 class InputDataBill extends Component
 {
     use WithFileUploads;
@@ -31,7 +32,7 @@ class InputDataBill extends Component
     public $notificationType = 'error'; // 'success', 'error', or 'info'
     public $notification = '';
     public $open=false;
-    
+    public $search = '';
     
     public function render()
     {
@@ -42,9 +43,13 @@ class InputDataBill extends Component
     }
     public function mount(){
         $this->merchants=Merchants::All();
-        //$this->notification="Uji Coba";
-        //dd($this->merchants);
-        // $this->setNotification('Isikan Data Anda dan Data Transaksi Anda dengan Sesuai','info');
+        $this->title="Regristasi";
+        }
+    public function getFilteredMerchantsProperty()
+    {
+        return $this->merchants->filter(function ($merchant) {
+            return stripos($merchant->nm_merchant, $this->search) !== false;
+        });
     }
     public function rulesForNik()
     {
@@ -85,12 +90,11 @@ class InputDataBill extends Component
         }
 
         
-        public function setNotification($message, $type = 'success', $open = true)
+        public function setNotification($message, $type, $open=true)
     {
         $this->notification = $message;
         $this->notificationType = $type;
         $this->open = $open;
-        $this->dispatch('notification');
     }        
 
         
@@ -210,7 +214,11 @@ class InputDataBill extends Component
                             'status_id' => 1, // Asumsi status_id yang digunakan adalah 1
                         ]);
                 
-                        $this->setNotification('Berhasil Menyimpan Data', 'success');
+                        Session::flash('notification', [
+                            'message' => 'Data berhasil disimpan!',
+                            'type' => 'success',
+                            'open' => true,
+                        ]);
                         return redirect()->route('inputDataBill');
                     }
     }

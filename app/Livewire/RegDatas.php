@@ -19,12 +19,14 @@ class RegDatas extends Component
     public $border='border';
     public $statusid="1";
     public $jmldata="20";
+    public $koldata="regs.id";
     public function render()
     {
       // Ambil data hasil join dari database dan lakukan paginasi di sini
       
       $statusid=$this->statusid;
       $jmldata=$this->jmldata;
+      $koldata=$this->koldata;
 
       $query = DB::table('regs')
       ->leftJoin('wp_datas', 'regs.nik', '=', 'wp_datas.nik')
@@ -40,8 +42,8 @@ class RegDatas extends Component
         $query->where('regs.status_id', '=', $statusid);
         }
 
-        
-      $dataregs=$query->paginate($jmldata);
+    
+      $dataregs=$query->orderBy($koldata)->paginate($jmldata);
 
   // Kirim data ke view
         return view('livewire.reg-datas', ['dataregs' => $dataregs]);
