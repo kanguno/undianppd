@@ -20,6 +20,7 @@ class RegDatas extends Component
     public $statusid="1";
     public $jmldata="20";
     public $koldata="regs.id";
+    public $keyword="";
     public function render()
     {
       // Ambil data hasil join dari database dan lakukan paginasi di sini
@@ -27,6 +28,7 @@ class RegDatas extends Component
       $statusid=$this->statusid;
       $jmldata=$this->jmldata;
       $koldata=$this->koldata;
+      $keyword=$this->keyword;
 
       $query = DB::table('regs')
       ->leftJoin('wp_datas', 'regs.nik', '=', 'wp_datas.nik')
@@ -42,8 +44,16 @@ class RegDatas extends Component
         $query->where('regs.status_id', '=', $statusid);
         }
 
+        
     
-      $dataregs=$query->orderBy($koldata)->paginate($jmldata);
+      $dataregs=$query
+      ->where('regs.id','like','%'.$keyword.'%')
+      ->orWhere('regs.nik','like','%'.$keyword.'%')
+      ->orWhere('regs.tgl_bill','like','%'.$keyword.'%')
+      ->orWhere('wp_datas.nm_wp','like','%'.$keyword.'%')
+      ->orWhere('merchants.nm_merchant','like','%'.$keyword.'%')
+      ->orWhere('undians.id','like','%'.$keyword.'%')
+      ->orderBy($koldata)->paginate($jmldata);
 
   // Kirim data ke view
         return view('livewire.reg-datas', ['dataregs' => $dataregs]);

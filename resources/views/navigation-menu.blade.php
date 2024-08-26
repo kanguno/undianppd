@@ -18,9 +18,11 @@
                     <x-nav-link href="{{ route('regdatas') }}" :active="request()->routeIs('regdatas')">
                         {{ __('Validasi') }}
                     </x-nav-link>
+                    @if(Auth::user()->name =='admin')
                     <x-nav-link href="{{ route('merchants') }}" :active="request()->routeIs('merchants')">
                         {{ __('Merchants') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 

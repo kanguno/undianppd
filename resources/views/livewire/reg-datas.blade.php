@@ -34,13 +34,13 @@
 
    
    
-        <table class="grid my-5 mx-auto w-full rounded-md shadow-md bg-white">
+        <table class=" my-5 mx-auto w-full rounded-md shadow-md bg-white">
         <thead>
             <tr>
-                    <div class="w-full mt-10 flex justify-end align-middle gap-3  bg-white p-3 shadow-md rounded-md">
+                    <div class="w-full mt-10 py-5 px-3 flex justify-end align-middle gap-3  bg-white shadow-md rounded-md">
                         <div class=" block justify-between min-w-fit gap-3">
                             <label for="jmldata">Jumlah Data yang Ditampilkan :</label>
-                            <select wire:model.live="jmldata" name="jmldata" id="jmldata" class="hover:cursor-pointer border-none">
+                            <select wire:model.live="jmldata" name="jmldata" id="jmldata" class=" w-12 hover:cursor-pointer border-none">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="20">20</option>
@@ -58,7 +58,7 @@
                     </div>
             </tr>
             <tr >
-            <td class="flex justify-start gap-5 py-5 align-middle border-2">
+            <td class="flex justify-between gap-5 pt-5 px-3 align-middle border-2">
                 <!-- Radio buttons (hidden) -->
                 <input type="radio" class="hidden" id="tab1" wire:model.live="statusid" name="statusid" value="1">
                 <input type="radio" class="hidden" id="tab2" wire:model.live="statusid" name="statusid" value="3">
@@ -73,14 +73,17 @@
                     <label for="tab4" class="tab-label px-4 py-2 cursor-pointer {{ $statusid === '0' ? 'border-t-2 border-x-2 border-t-[#818cf8] rounded-t-lg  bg-white -mb-1' : '' }} transition-colors duration-300">Semua</label>
                 </div>    
                 
-                        <div class=" min-w-fit gap-3">
-                            <label for="koldata">Urutkan Berdasarkan</label>
-                            <select wire:model.live="koldata" name="koldata" id="koldata" class="hover:cursor-pointer border-none">
-                                <option value="regs.id">id</option>
-                                <option value="regs.nik">nik</option>
-                                <option value="wp_datas.nm_wp">Nama Wajib Pajak</option>
-                                <option value="regs.tgl_bill">Tanggal Transaksi</option>
-                            </select>
+                        <div class=" flex min-w-fit mb-3 gap-5">
+                            <input class="border-none rounded-lg bg-slate-200" type="text" id="keyword" placeholder="Cari Data" wire:model.live.debounce.500="keyword">
+                            <div class="flex bg-slate-200 rounded-lg ">
+                                <label for="koldata" class=" my-auto ps-2">Sort By</label>
+                                <select wire:model.live="koldata" name="koldata" id="koldata" class=" bg-transparent hover:cursor-pointer border-none text-center p-2">
+                                    <option value="regs.id">id</option>
+                                    <option value="regs.nik">nik</option>
+                                    <option value="wp_datas.nm_wp">Nama Wajib Pajak</option>
+                                    <option value="regs.tgl_bill">Tanggal Transaksi</option>
+                                </select>
+                            </div>
                         </div>  
             </td>
         </tr>
@@ -105,7 +108,9 @@
                             @if($statusid>'0')
                             <th class="border px-4 py-2">Action</th>
                             @endif
+                            @if(Auth::user()->name =='admin')
                             <th class="border px-4 py-2">Option</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -140,10 +145,11 @@
                                         <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-green-600 text-white rounded-md">Kirim</a>
                                     </td>
                                     @endif
-                                
+                                    @if(Auth::user()->name =='admin')
                                 <td class="border px-4 py-2 text-center">
                                     <button wire:click="resetValidasi({{$reg->id}})" class="btn py-1 px-2 bg-yellow-600 text-white rounded-md">Reset</button>
                                 </td>
+                                @endif
                             </tr>
                         @empty
                             <tr>
