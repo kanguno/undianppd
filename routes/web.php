@@ -35,6 +35,7 @@ Route::middleware([
         // })->name('dashboard');
         
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
+        //Route::get('/register', Dashboard::class)->name('register');
         Route::get('/regdatas', RegDatas::class)->name('regdatas');
         Route::get('/merchants', Merchant::class)->name('merchants');
         Route::get('/regdatas/{statusid}', RegDatas::class)->name('regdatastatus');
