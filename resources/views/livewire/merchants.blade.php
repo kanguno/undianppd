@@ -1,6 +1,4 @@
 <div class="p-10">
-    <h1 class="font-bold text-2xl text-center mb-10">Data Merchant Pajak Daerah Tuban Tahun 2024</h1>
-
     <x-loading/>
     @if($notification)
     <x-notif/>
@@ -49,8 +47,8 @@
 
                     <button wire:click="deleteData({{$modalid}})"
                     :class="{
-                        'bg-green-600': notificationType === 'success',
-                        'bg-red-600': notificationType === 'error',
+                        'bg-[#43a047]': notificationType === 'success',
+                        'bg-[#d81b60]': notificationType === 'error',
                         'bg-blue-600': notificationType === 'info'
                         }"
                         class="px-3 py-2 rounded-lg text-white"
@@ -84,7 +82,7 @@
                 class="shadow mb-3 bg-[#e5e7eb] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full"><br>
                 @error('almmerchant') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
-            <button type="submit" class="justify-self-end bg-[#00bcd5] hover:bg-blue-700 text-white font-bold py-2 px-10 rounded-xl">
+            <button type="submit" class="justify-self-end bg-[#00bcd5] hover:bg-[#1a73e8] text-white font-bold py-2 px-10 rounded-xl">
                 Submit
             </button>
         </form>
@@ -93,51 +91,64 @@
     <table class="my-5 mx-auto w-full rounded-md shadow-md bg-white {{$tablehidden}}">
         <thead>
             <tr>
-                    <div class="w-full flex justify-end align-middle gap-3  bg-white p-3 shadow-md rounded-md">
-                        <div class="">
-                            <label for="jmldata">Jumlah Data yang Ditampilkan :</label>
-                            <select wire:model.live="jmldata" name="jmldata" id="jmldata" class="hover:cursor-pointer border-none w-auto">
+            <div class="w-full mt-10 py-5 px-3 flex justify-end align-middle gap-3  bg-white shadow-md rounded-md">
+                        <div class=" block justify-between min-w-fit gap-3 my-auto">
+                                <label for="koldata">Sort By</label>
+                                <select wire:model.live="koldata" name="koldata" id="koldata" class=" w-fit hover:cursor-pointer border-none">
+                                    <option value="merchants.id">id</option>
+                                    <option value="merchants.nm_merchant">Nama Merchant</option>
+                                    <option value="merchants.device_id">Device ID</option>
+                                    <option value="merchants.nopd">NOPD</option>
+                                </select>
+                            </div>
+
+                            <div class=" block justify-between min-w-fit gap-3 my-auto">
+                            <label for="jmldata">Ditampilkan :</label>
+                            <select wire:model.live="jmldata" name="jmldata" id="jmldata" class=" w-12 hover:cursor-pointer border-none">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="50">50</option>
                                 <option value="100">100</option>
                             </select>
-                        </div>    
+                            </div>    
+                            
+                            <input class="border-b-2 border-r-2 rounded-md" type="text" id="keyword" placeholder="Cari Data" wire:model.live.debounce.500="keyword">
+    
 
                         <div>
-                            <button wire:click.prevent="tambahData" class="bg-blue-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Tambah Data</button>
+                            <button wire:click.prevent="tambahData" class="bg-[#1a73e8] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Tambah Data</button>
                             <button wire:click="modalImport()" class="bg-gray-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Import Data</button>
-                            <button wire:click="exportData()" class="bg-green-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Export Data</button>
+                            <button wire:click="exportData()" class="bg-[#43a047] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Export Data</button>
                         </div>
 
                     </div>
             </tr>
             <tr>
-                <th class="border px-4 py-2">ID</th>
-                <th class="border px-4 py-2">Nama Merchant</th>
-                <th class="border px-4 py-2">Device ID</th>
-                <th class="border px-4 py-2">NOPD</th>
-                <th class="border px-4 py-2">Alamat Merchant</th>
-                <th class="border px-4 py-2">Options</th>
+                <th class="border-b-2 px-4 py-2">ID</th>
+                <th class="border-b-2 px-4 py-2">Nama Merchant</th>
+                <th class="border-b-2 px-4 py-2">Device ID</th>
+                <th class="border-b-2 px-4 py-2">NOPD</th>
+                <th class="border-b-2 px-4 py-2">Alamat Merchant</th>
+                <th class="border-b-2 px-4 py-2">Options</th>
             </tr>
         </thead>
         <tbody>
             @forelse($datamerchants as $index => $merchant)
                         <tr>
-                            <td class="border px-4 py-2 text-center">{{ $merchant->id}}</td>
-                            <td class="border px-4 py-2 text-center">{{ $merchant->nm_merchant }}</td>
-                            <td class="border px-4 py-2 text-center">{{ $merchant->device_id}}</td>
-                            <td class="border px-4 py-2 text-center">{{ $merchant->nopd}}</td>
-                            <td class="border px-4 py-2 text-center">{{ $merchant->alm_merchant }}</td>
-                            <td class="border px-4 py-2 text-center">
-                                <button wire:click="editData({{ $merchant->id }})" class="btn py-1 px-2 bg-yellow-600 text-white rounded-md" >Edit</button>
-                                <button wire:click="modalDelete('{{ $merchant->id }}', '{{ $merchant->nm_merchant }}')" class="btn py-1 px-2 bg-red-600 text-white rounded-md">Hapus</button>
+                            <td class="border-b-2 px-4 py-2 text-center">{{ $merchant->id}}</td>
+                            <td class="border-b-2 px-4 py-2 text-center">{{ $merchant->nm_merchant }}</td>
+                            <td class="border-b-2 px-4 py-2 text-center">{{ $merchant->device_id}}</td>
+                            <td class="border-b-2 px-4 py-2 text-center">{{ $merchant->nopd}}</td>
+                            <td class="border-b-2 px-4 py-2 text-center">{{ $merchant->alm_merchant }}</td>
+                            <td class="border-b-2 px-4 py-2 text-center">
+                                <button wire:click="editData({{ $merchant->id }})" class="btn py-1 px-2 bg-[#ef5350] text-white rounded-md" >Edit</button>
+                                <button wire:click="modalDelete('{{ $merchant->id }}', '{{ $merchant->nm_merchant }}')" class="btn py-1 px-2 bg-[#d81b60] text-white rounded-md">Hapus</button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="border px-4 py-2 text-center">No data available</td>
+                            <td colspan="8" class="border-none px-4 py-5 text-center">Belum ada data</td>
                         </tr>
                     @endforelse
         </tbody>

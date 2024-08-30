@@ -114,8 +114,8 @@
                     @error('keterangan') <span class="text-red-600">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end gap-3">
-                    <button wire:click="tolakValidasi" class="btn text-white bg-red-600">Ditolak</button>
-                    <button type="submit" class="btn text-white bg-green-600">Diterima</button>
+                    <button wire:click="tolakValidasi" class="btn text-white bg-[#d81b60]">Ditolak</button>
+                    <button type="submit" class="btn text-white bg-[#43a047]">Diterima</button>
                 </div>
             </form>
 

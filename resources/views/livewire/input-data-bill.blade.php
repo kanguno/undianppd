@@ -45,7 +45,7 @@
                 <input id="nik" wire:model.defer="nik" type="text" placeholder="Masukkan NIK (Nomor Induk Kependudukan) Anda"
                        class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
-            <button type="submit" class="justify-self-center bg-[#00bcd5] hover:bg-blue-700 text-white font-bold py-2 px-10 rounded-xl">
+            <button type="submit" class="justify-self-center bg-[#00bcd5] hover:bg-[#1a73e8] text-white font-bold py-2 px-10 rounded-xl">
                 Submit
             </button>
         </form>
@@ -61,7 +61,7 @@
             <div class="flex gap-4 justify-end my-5">
                 <button onclick="window.location.reload();" class="bg-slate-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
                     Kembali</button>
-                <button class="ml-4 bg-[#00bcd5] hover:bg-blue-700 text-white px-4 py-2 rounded-lg" wire:click="tambahreg">
+                <button class="ml-4 bg-[#00bcd5] hover:bg-[#1a73e8] text-white px-4 py-2 rounded-lg" wire:click="tambahreg">
                     Lanjutkan</button>
             </div>
             @else
@@ -161,7 +161,7 @@
                 @endif
             </div>
 
-            <button type="submit" class="justify-self-center bg-[#00bcd5] hover:bg-blue-700 text-white font-bold py-2 px-10 rounded-xl">
+            <button type="submit" class="justify-self-center bg-[#00bcd5] hover:bg-[#1a73e8] text-white font-bold py-2 px-10 rounded-xl">
                 Save
             </button>
         </form>

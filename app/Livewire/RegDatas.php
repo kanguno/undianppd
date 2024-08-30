@@ -35,28 +35,37 @@ class RegDatas extends Component
       ->leftJoin('merchants', 'regs.merchant_id', '=', 'merchants.id')
       ->join('statuses', 'regs.status_id', '=', 'statuses.id')
       ->leftJoin('undians', 'regs.id', '=', 'undians.reg_id')
-      ->select('regs.*', 'wp_datas.nm_wp as nm_wp','wp_datas.no_hp as no_hp', 'merchants.nm_merchant as nm_merchant','statuses.reg_status','undians.id as no_undian');
-      
-      if ($statusid === '1' || $statusid === '2') {
-        $query->where('regs.status_id', '<', 3);
-        } else if ($statusid) {
-        // Apply other conditions based on $statusid if needed
-        $query->where('regs.status_id', '=', $statusid);
-        }
-
-        
-    
-      $dataregs=$query
-      ->where('regs.id','like','%'.$keyword.'%')
-      ->orWhere('regs.nik','like','%'.$keyword.'%')
-      ->orWhere('regs.tgl_bill','like','%'.$keyword.'%')
-      ->orWhere('wp_datas.nm_wp','like','%'.$keyword.'%')
-      ->orWhere('merchants.nm_merchant','like','%'.$keyword.'%')
-      ->orWhere('undians.id','like','%'.$keyword.'%')
-      ->orderBy($koldata)->paginate($jmldata);
-
+      ->select(
+          'regs.*', 
+          'wp_datas.nm_wp as nm_wp',
+          'wp_datas.no_hp as no_hp', 
+          'merchants.nm_merchant as nm_merchant',
+          'statuses.reg_status',
+          'undians.id as no_undian'
+      );
+  
+  // Terapkan pencarian kata kunci
+  $query->where(function($subquery) use ($keyword) {
+      $subquery->where('regs.id', 'like', '%' . $keyword . '%')
+          ->orWhere('regs.nik', 'like', '%' . $keyword . '%')
+          ->orWhere('regs.tgl_bill', 'like', '%' . $keyword . '%')
+          ->orWhere('wp_datas.nm_wp', 'like', '%' . $keyword . '%')
+          ->orWhere('merchants.nm_merchant', 'like', '%' . $keyword . '%')
+          ->orWhere('undians.id', 'like', '%' . $keyword . '%');
+  });
+  
+  // Terapkan filter berdasarkan status_id
+  if ($statusid === '1' || $statusid === '2') {
+      $query->where('regs.status_id', '<', 3);
+  } else {
+      $query->where('regs.status_id', '=', $statusid);
+  }
+  
+  // Urutkan dan paginasi
+  $dataregs = $query->orderBy($koldata)->paginate($jmldata);
+  
   // Kirim data ke view
-        return view('livewire.reg-datas', ['dataregs' => $dataregs]);
+  return view('livewire.reg-datas', ['dataregs' => $dataregs]);
     }
 
     public function setNotification($message, $type = 'success', $open = true)

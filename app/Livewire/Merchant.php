@@ -32,11 +32,19 @@ class Merchant extends Component
     public $tablehidden='';
     public $wiresubmit='';
     public $fileexcel='';
+    public $koldata="merchants.id";
+    public $keyword="";
 
     public function render()
     {
         $jmldata=$this->jmldata;
-        $datamerchants=Merchants::paginate($jmldata);
+        $koldata=$this->koldata;
+        $keyword=$this->keyword;
+        $datamerchants=Merchants::where('merchants.id', 'like', '%' . $keyword . '%')
+        ->orWhere('merchants.nm_merchant', 'like', '%' . $keyword . '%')
+        ->orderBy($koldata)
+        ->paginate($jmldata);
+
         return view('livewire.merchants',['datamerchants' => $datamerchants])->layout('layouts.app');;
     }    
     public function setNotification($message, $type, $open=true)

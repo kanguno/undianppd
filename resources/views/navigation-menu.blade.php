@@ -23,6 +23,11 @@
                         {{ __('Merchants') }}
                     </x-nav-link>
                     @endif
+                    @if(Auth::user()->name =='admin')
+                    <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('merchants')">
+                        {{ __('Tambah User') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

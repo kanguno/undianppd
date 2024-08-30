@@ -82,19 +82,22 @@ class ValidasiDataBill extends Component
         public function validasiStore()
         {
             $this->validate($this->rulesDataBill());
-            
-            
     
             try {
                 $regdata = Regs::find($this->regid);
+                
     
                 if ($regdata) {
+                    try{
                     $regdata->update([
                         'status_id' => '3',
                         'status_tappingbox' => $this->statustappingbox,
                         'tappingbox_id' => $this->tappingboxid,
                     ]);
-
+                    }
+                    catch(\Exception $e){
+                        dd($e);
+                    }
                     $cekundian=Undians::where('reg_id','=',$this->regid)->first();
                     if(empty($cekundian)){
                     Undians::create([

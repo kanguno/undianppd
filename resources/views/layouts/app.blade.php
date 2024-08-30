@@ -30,7 +30,7 @@
                     </span>
                 </div>
             </div>
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-200">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

@@ -1,4 +1,4 @@
-<div class="p-10 grid">
+<div class="p-10 grid text-base">
     <h1 class="font-bold text-2xl text-center">Data Undian Pajak Daerah Tahun 2024</h1>
 
     <x-loading/>
@@ -36,27 +36,6 @@
    
         <table class=" my-5 mx-auto w-full rounded-md shadow-md bg-white">
         <thead>
-            <tr>
-                    <div class="w-full mt-10 py-5 px-3 flex justify-end align-middle gap-3  bg-white shadow-md rounded-md">
-                        <div class=" block justify-between min-w-fit gap-3">
-                            <label for="jmldata">Jumlah Data yang Ditampilkan :</label>
-                            <select wire:model.live="jmldata" name="jmldata" id="jmldata" class=" w-12 hover:cursor-pointer border-none">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                        </div>    
-
-                        <div>
-                            <button wire:click.prevent="tambahData" class="bg-blue-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Tambah Data</button>
-                            <button wire:click="modalImport()" class="bg-gray-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Import Data</button>
-                            <button wire:click="exportData({{$statusid}})" class="bg-green-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Export Data</button>
-                        </div>
-
-                    </div>
-            </tr>
             <tr >
             <td class="flex justify-between gap-5 pt-5 px-3 align-middle border-2">
                 <!-- Radio buttons (hidden) -->
@@ -74,59 +53,75 @@
                 </div>    
                 
                         <div class=" flex min-w-fit mb-3 gap-5">
-                            <input class="border-none rounded-lg bg-slate-200" type="text" id="keyword" placeholder="Cari Data" wire:model.live.debounce.500="keyword">
-                            <div class="flex bg-slate-200 rounded-lg ">
-                                <label for="koldata" class=" my-auto ps-2">Sort By</label>
-                                <select wire:model.live="koldata" name="koldata" id="koldata" class=" bg-transparent hover:cursor-pointer border-none text-center p-2">
+                            <div class=" block justify-between min-w-fit gap-3 my-auto">
+                                <label for="koldata">Sort By</label>
+                                <select wire:model.live="koldata" name="koldata" id="koldata" class=" w-12 hover:cursor-pointer border-none">
                                     <option value="regs.id">id</option>
                                     <option value="regs.nik">nik</option>
                                     <option value="wp_datas.nm_wp">Nama Wajib Pajak</option>
                                     <option value="regs.tgl_bill">Tanggal Transaksi</option>
                                 </select>
                             </div>
+
+                            <div class=" block justify-between min-w-fit gap-3 my-auto">
+                            <label for="jmldata">Ditampilkan :</label>
+                            <select wire:model.live="jmldata" name="jmldata" id="jmldata" class=" w-12 hover:cursor-pointer border-none">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            </div>    
+                            
+                            <input class="border-b-2 border-r-2 rounded-md" type="text" id="keyword" placeholder="Cari Data" wire:model.live.debounce.500="keyword">
+                            
+                            <button wire:click="exportData({{$statusid}})" class="bg-[#43a047] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Export Data</button>
+                            
+
                         </div>  
             </td>
         </tr>
         <tr>
             <td  class="p-5">
-                <table class="my-10 mx-auto min-w-full bg-white border border-gray-200">
+                <table class="my-10 mx-auto min-w-full border-none bg-white text-gray-700 text-sm">
                     <thead>
                         <tr>
-                            <th class="border px-4 py-2">No.</th>
-                            <th class="border px-4 py-2">NIK</th>
-                            <th class="border px-4 py-2">Nama WP</th>
-                            <th class="border px-4 py-2">No. Pendaftaran</th>
-                            <th class="border px-4 py-2">Merchant</th>
-                            <th class="border px-4 py-2">Tanggal Transaksi</th>
-                            <th class="border px-4 py-2">Status</th>
+                            <th class="border-b-2 px-4 py-2">No.</th>
+                            <th class="border-b-2 px-4 py-2">NIK</th>
+                            <th class="border-b-2 px-4 py-2">Nama WP</th>
+                            <th class="border-b-2 px-4 py-2">No. Pendaftaran</th>
+                            <th class="border-b-2 px-4 py-2">Merchant</th>
+                            <th class="border-b-2 px-4 py-2">Tanggal Transaksi</th>
+                            <th class="border-b-2 px-4 py-2">Status</th>
                             @if($statusid=='3')
-                            <th class="border px-4 py-2">No. Undian</th>
+                            <th class="border-b-2 px-4 py-2">No. Undian</th>
                             @endif
                             @if($statusid=='4'||$statusid=='0')
-                            <th class="border px-4 py-2">Keterangan</th>
+                            <th class="border-b-2 px-4 py-2">Keterangan</th>
                             @endif
                             @if($statusid>'0')
-                            <th class="border px-4 py-2">Action</th>
+                            <th class="border-b-2 px-4 py-2">Action</th>
                             @endif
                             @if(Auth::user()->name =='admin')
-                            <th class="border px-4 py-2">Option</th>
+                            <th class="border-b-2 px-4 py-2">Option</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($dataregs as $index => $reg)
                             <tr>
-                                <td class="border px-4 py-2 text-center">{{ $index + 1 + ($dataregs->currentPage() - 1) * $dataregs->perPage() }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $reg->nik }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $reg->nm_wp }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $reg->id }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $reg->nm_merchant }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $reg->tgl_bill }}</td>
-                                <td class="border px-4 py-2 text-center">{{ $reg->reg_status }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $index + 1 + ($dataregs->currentPage() - 1) * $dataregs->perPage() }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $reg->nik }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $reg->nm_wp }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $reg->id }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $reg->nm_merchant }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $reg->tgl_bill }}</td>
+                                <td class="border-b-2 px-4 py-2 text-center">{{ $reg->reg_status }}</td>
                                     @if($statusid=='0')
-                                    <td class="border px-4 py-2 text-center">{{ $reg->keterangan }}</td>
+                                    <td class="border-b-2 px-4 py-2 text-center">{{ $reg->keterangan }}</td>
                                     @elseif($statusid=='1')
-                                    <td class="border px-4 py-2 text-center">
+                                    <td class="border-b-2 px-4 py-2 text-center">
                                         <button wire:click="ValidasiData({{$reg->id}})" 
                                         @if ($reg->status_id == '1')
                                         class="btn py-1 px-2 bg-blue-600 text-white rounded-md"
@@ -135,25 +130,25 @@
                                         >Validasi</button>
                                     </td>
                                     @elseif($statusid=='3')
-                                    <td class="border px-4 py-2 text-center">{{ $reg->no_undian }}</td>
-                                    <td class="border px-4 py-2 text-center">
-                                        <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-green-600 text-white rounded-md">Kirim</a>
+                                    <td class="border-b-2 px-4 py-2 text-center">{{ $reg->no_undian }}</td>
+                                    <td class="border-b-2 px-4 py-2 text-center">
+                                        <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-[#43a047] text-white rounded-md">Kirim</a>
                                     </td>
                                     @elseif($statusid=='4')
-                                    <td class="border px-4 py-2 text-center">{{ $reg->keterangan }}</td>
-                                    <td class="border px-4 py-2 text-center">
-                                        <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-green-600 text-white rounded-md">Kirim</a>
+                                    <td class="border-b-2 px-4 py-2 text-center">{{ $reg->keterangan }}</td>
+                                    <td class="border-b-2 px-4 py-2 text-center">
+                                        <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-[#43a047] text-white rounded-md">Kirim</a>
                                     </td>
                                     @endif
                                     @if(Auth::user()->name =='admin')
-                                <td class="border px-4 py-2 text-center">
-                                    <button wire:click="resetValidasi({{$reg->id}})" class="btn py-1 px-2 bg-yellow-600 text-white rounded-md">Reset</button>
+                                <td class="border-b-2 px-4 py-2 text-center">
+                                    <button wire:click="resetValidasi({{$reg->id}})" class="btn py-1 px-2 bg-[#ef5350] text-white rounded-md">Reset</button>
                                 </td>
                                 @endif
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="border px-4 py-2 text-center">No data available</td>
+                                <td colspan="8" class="border-none px-4 py-5 text-center">Belum ada data</td>
                             </tr>
                         @endforelse
                     </tbody>
