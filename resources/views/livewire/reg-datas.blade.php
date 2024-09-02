@@ -86,7 +86,7 @@
             <td  class="p-5">
                 <table class="my-10 mx-auto min-w-full border-none bg-white text-gray-700 text-sm">
                     <thead>
-                        <tr>
+                        <tr class="border-2">
                             <th class="border-b-2 px-4 py-2">No.</th>
                             <th class="border-b-2 px-4 py-2">NIK</th>
                             <th class="border-b-2 px-4 py-2">Nama WP</th>
@@ -110,7 +110,7 @@
                     </thead>
                     <tbody>
                         @forelse($dataregs as $index => $reg)
-                            <tr>
+                        <tr class="border-2">
                                 <td class="border-b-2 px-4 py-2 text-center">{{ $index + 1 + ($dataregs->currentPage() - 1) * $dataregs->perPage() }}</td>
                                 <td class="border-b-2 px-4 py-2 text-center">{{ $reg->nik }}</td>
                                 <td class="border-b-2 px-4 py-2 text-center">{{ $reg->nm_wp }}</td>

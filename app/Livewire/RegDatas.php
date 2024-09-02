@@ -55,11 +55,15 @@ class RegDatas extends Component
   });
   
   // Terapkan filter berdasarkan status_id
+  if($statusid!='0'){
+  
   if ($statusid === '1' || $statusid === '2') {
       $query->where('regs.status_id', '<', 3);
-  } else {
+  }
+  else {
       $query->where('regs.status_id', '=', $statusid);
   }
+}
   
   // Urutkan dan paginasi
   $dataregs = $query->orderBy($koldata)->paginate($jmldata);

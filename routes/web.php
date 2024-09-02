@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::get('/inputdata', InputDataBill::class)->name('inputDataBill');
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -37,7 +38,8 @@ Route::middleware([
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
         Route::get('/register', function () {
             return view('auth.register');
-        })->name('register');
+        })->name('register.form');
+
         Route::get('/regdatas', RegDatas::class)->name('regdatas');
         Route::get('/merchants', Merchant::class)->name('merchants');
         Route::get('/regdatas/{statusid}', RegDatas::class)->name('regdatastatus');
