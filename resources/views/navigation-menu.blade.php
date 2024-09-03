@@ -24,7 +24,7 @@
                     </x-nav-link>
                     @endif
                     @if(Auth::user()->name =='admin')
-                    <x-nav-link href="{{ route('register.form') }}" :active="request()->routeIs('merchants')">
+                    <x-nav-link href="{{ route('register.form') }}" :active="request()->routeIs('register.form')">
                         {{ __('Tambah User') }}
                     </x-nav-link>
                     @endif

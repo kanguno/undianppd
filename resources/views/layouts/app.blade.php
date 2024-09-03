@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<title>{{ config('app.name', 'BPKPAD') }}</title>
+        <link rel="icon" href="{{ asset('storage/image/tubankab.png') }}"/> 
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-        <script src="https://cdn.tailwindcss.com"></script>
-
+       
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,16 +20,10 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-sm">
         <x-banner />
 
-        <div wire:loading class="flex items-center justify-center overlay z-50 h-screen w-screen bg-black bg-opacity-50 fixed top-0 left-0">
-                <div class="absolute bg-light justify-content-center w-full h-full position-fixed opacity-100 left-0 top-0 text-center translate-middle z-10">
-                    <span class="flex justify-center items-center h-full">
-                        <img class=" max-w-48 h-auto animate-bounce duration-[100000]" src="{{ asset('storage/image/isometrikppdwb.png') }}" alt="">
-                    </span>
-                </div>
-            </div>
+        <x-loading/>
         <div class="min-h-screen bg-gray-200">
             @livewire('navigation-menu')
 

@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<title>{{ config('app.name', 'BPKPAD') }}</title>
+        <link rel="icon" href="{{ asset('storage/image/tubankab.png') }}"/> 
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-        <script src="https://cdn.tailwindcss.com"></script>
-
+        
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -45,6 +45,7 @@
     
 
         <x-banner />
+        <x-loading/>
 
         <div class="min-h-screen bg-gray-100">
 

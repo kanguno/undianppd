@@ -85,6 +85,9 @@ class Merchant extends Component
         $this->wiresubmit="inputData";
 
     }
+    public function kembali(){
+        $this->reset();
+    }
     public function editData($id){
         $this->hidden='';
         $this->tablehidden='hidden';
@@ -94,8 +97,7 @@ class Merchant extends Component
         $this->namamerchant=$data->nm_merchant;
         $this->nopd=$data->nopd;
         $this->almmerchant=$data->alm_merchant;
-        $this->deviceid=$data->device_id;
-        
+        $this->deviceid=$data->device_id;        
     }
     
     public function inputData(){

@@ -4,8 +4,6 @@
         <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1>
 
         <!-- Notification Handling -->
-        <x-loading/>
-        
         
         @if (!empty($notification))
         
@@ -43,8 +41,9 @@
             <div class="mb-4">
                 <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
                 <input id="nik" wire:model.defer="nik" type="text" placeholder="Masukkan NIK (Nomor Induk Kependudukan) Anda"
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
+            @error('nik') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             <button type="submit" class="justify-self-center bg-[#00bcd5] hover:bg-[#1a73e8] text-white font-bold py-2 px-10 rounded-xl">
                 Submit
             </button>
@@ -85,46 +84,45 @@
             <div class="mb-4">
                 <!-- <label for="nik-display" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
                 <input id="nik-display" type="text" value="{{ $nik }}" readonly
-                class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
+                class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
 
             <div class="mb-4">
-                <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama</label>
+                <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama <b class="text-red-600">*</b></label>
                 <input id="nama" type="text" placeholder="Masukkan Nama Anda" wire:model.defer="nama" {{ $readonly }}
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('nama') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
 
             <div class="mb-4">
-                <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat</label>
+                <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat <b class="text-red-600">*</b></label>
                 <input id="alamat" type="text" placeholder="Masukkan Alamat Anda" wire:model.defer="alamat" {{ $readonly }}
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('alamat') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
-                <label for="nohp" class="block text-gray-700 text-sm font-bold mb-2">No HP (WA)</label>
+                <label for="nohp" class="block text-gray-700 text-sm font-bold mb-2">No HP (WA) <b class="text-red-600">*</b></label>
                 <input id="nohp" type="text" placeholder="Masukkan No Handphone (WA) Anda" wire:model.defer="nohp" {{ $readonly }}
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('nohp') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                 <input id="email" type="email" placeholder="Masukkan Alamat Email Anda" wire:model.defer="email" {{ $readonly }}
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('email') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
-                <label for="merchant" class="block text-gray-700 text-sm font-bold mb-2">Merchant</label>
+                <label for="merchant" class="block text-gray-700 text-sm font-bold mb-2">Merchant <b class="text-red-600">*</b></label>
                 
                 <input type="text" wire:model.live.debounce.300ms="search" 
                         placeholder="Ketik Disini Untuk Memfilter Merchant" 
-                        class="shadow bg-[#e5e7eb] mb-4 text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="shadow bg-[#eeeeee] mb-4 text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 <select id="merchant" wire:model.defer="merchant"
-                 class="shadow bg-[#e5e7eb] text-md border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                 class="shadow bg-[#eeeeee] text-md border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     @if($merchants)
                     <option value="">Pilih Merchant</option>
                     @foreach($this->filteredMerchants as $merchant)
@@ -136,25 +134,25 @@
             </div>
 
             <div class="mb-4">
-                <label for="tglbill" class="block text-gray-700 text-sm font-bold mb-2">Tanggal Transaksi (Tanggal yang Tercatat di Bill/Struk)</label>
+                <label for="tglbill" class="block text-gray-700 text-sm font-bold mb-2">Tanggal Transaksi (Tanggal yang Tercatat di Bill/Struk) <b class="text-red-600">*</b></label>
                 <input wire:model.defer="tglbill" type="date" id="tglbill" name="tglbill"
                        min="2024-08-17" max="2024-10-30"
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('tglbill') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
-                <label for="jambill" class="block text-gray-700 text-sm font-bold mb-2">Jam Transaksi Tanggal Transaksi (Jam yang Tercatat di Bill/Struk)</label>
+                <label for="jambill" class="block text-gray-700 text-sm font-bold mb-2">Jam Transaksi Tanggal Transaksi (Jam yang Tercatat di Bill/Struk) <b class="text-red-600">*</b></label>
                 <input wire:model.defer="jambill" type="time" id="jambill" name="jambill"
                        min="00:00:00" max="24:59:59" step="2"
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('jambill') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
-                <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Foto Bill/Struk (Setelah Upload Mohon Tunggu Sampai Foto Ditampilkan)</label>
+                <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Foto Bill/Struk (Setelah Upload Mohon Tunggu Sampai Foto Ditampilkan) <b class="text-red-600">*</b></label>
                 <input type="file" id="photo" wire:model="photo" accept="image/*"
-                       class="shadow bg-[#e5e7eb] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('photo') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
                 @if ($photo)
                     <img src="{{ $photo->temporaryUrl() }}" class="mt-2 w-full h-auto">

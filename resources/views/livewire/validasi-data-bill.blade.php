@@ -1,6 +1,4 @@
-<div class="bg-white p-10">
-<h1 class="font-bold text-2xl text-center">Validasi Data Undian Pajak Daerah Tahun 2024</h1>    
-
+<div class="bg-white p-5">
 @if ($notification) 
     <div 
         x-data="{ 
@@ -38,59 +36,61 @@
 @endif
 
 
-<div class="my-10 p-10">
+<div class="p-10">
+<button wire:click="kembali" class="btn px-2 py-1 text-white bg-blue-600">Kembali</button>
+
     @forelse($dataregs as $index => $reg)
-    <div class="grid md:flex gap-10">
+    <div class="grid md:flex gap-10 justify-between">
         <div class="md:w-1/2">
-        <table class="table border-none text-lg">
+        <table class="table border-none">
             <tbody>
-                <tr>
+                <tr class="border-none">
                     <td colspan="3" class="py-5 font-bold text-center">Data Wajib Pajak</td> 
                 </tr>
-                <tr>
+                <tr class="border-none">
                     <td class="px-4 py-2 text-start">No Regristasi</td>
                     <td class="px-4 py-2 text-start">:</td>
                     <td class="px-4 py-2 text-start">{{ $reg->id }}</td>
                 </tr>
 
-                <tr>
+                <tr class="border-none">
                     <td class="px-4 py-2 text-start">NIK</td>
                     <td class="px-4 py-2 text-start">:</td>
                     <td class="px-4 py-2 text-start">{{ $reg->nik }}</td>
                 </tr>
-                <tr> 
+                <tr class="border-none"> 
                     <td class="px-4 py-2 text-start">Nama Wajib Pajak</td>
                     <td class="px-4 py-2 text-start">:</td>   
                     <td class="px-4 py-2 text-start">{{ $reg->nm_wp }}</td>
                 </tr>
-                <tr> 
+                <tr class="border-none"> 
                     <td class="px-4 py-2 text-start">Alamat Wajib Pajak</td>
                     <td class="px-4 py-2 text-start">:</td>   
                     <td class="px-4 py-2 text-start">{{ $reg->alm_wp }}</td>
                 </tr>
-                <tr> 
+                <tr class="border-none"> 
                     <td class="px-4 py-2 text-start">No HP Wajib Pajak</td>
                     <td class="px-4 py-2 text-start">:</td>   
                     <td class="px-4 py-2 text-start">{{ $reg->nohp }}</td>
                 </tr>
-                <tr> 
+                <tr class="border-none"> 
                     <td class="px-4 py-2 text-start">Email</td>
                     <td class="px-4 py-2 text-start">:</td>   
                     <td class="px-4 py-2 text-start">{{ $reg->email }}</td>
                 </tr>
         
-                <tr>
+                <tr class="border-none">
                     <td colspan="3" class="py-5"></td> 
                 </tr>
-                <tr>
-                    <td colspan="3" class="py-5 font-bold text-center">Data Transaksi</td> 
+                <tr class="border-none">
+                    <td colspan="3" class="py-5 font-bold text-center border-t-2">Data Transaksi</td> 
                 </tr>
-                <tr>
+                <tr class="border-none">
                     <td class="px-4 py-2 text-start">Nama Merchant</td>
                     <td class="px-4 py-2 text-start">:</td>   
                     <td class="px-4 py-2 text-start">{{ $reg->nm_merchant }}</td>
                 </tr>
-                <tr>
+                <tr class="border-none">
                     <td class="px-4 py-2 text-start">Tanggal Transaksi</td>
                     <td class="px-4 py-2 text-start">:</td>   
                     <td class="px-4 py-2 text-start">{{ $reg->tgl_bill }}</td>
@@ -106,7 +106,7 @@
                         <option value="0">Tidak</option>
                     </select>
                     @error('statustappingbox') <span class="text-red-600">{{ $message }}</span> @enderror
-                    <input class="w-full border-gray-200 rounded-md p-2" type="text" wire:model="tappingboxid" placeholder="ID Taping BOX">
+                    <input class="w-full border-gray-200 rounded-md p-2" type="text" wire:model="tappingboxid" placeholder="Nomor Struk Tapping Box">
                     @error('tappingboxid') <span class="text-red-600">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-5">
@@ -121,7 +121,7 @@
 
             </div>
         </div>
-        <div class="img-wrap md:w-1/2 relative">
+        <div class="img-wrap md:w-1/3 relative">
                 <h1  class="py-5 font-bold text-center">Gambar Bill</h1>
                 <div class="overflow-scroll p-5 max-h-96" id="scrollable">
                     <img id="draggableImg" style="transform: scale({{ $imgzoom / 100 }}); transform-origin:top left;" class="" src="{{ asset('storage/photos/'.$reg->bill_img) }}" alt="Bill Image for {{ $reg->id }}">
@@ -136,7 +136,7 @@
         @empty
         <table>
             <tbody>
-                <tr>
+                <tr class="border-none">
                     <td colspan="3" class="px-4 py-2 text-start">Data tidak ditemukan</td>
                 </tr>
             </tbody>

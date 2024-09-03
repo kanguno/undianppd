@@ -60,35 +60,7 @@
             </div>
         </div>
     @endif
-    <div class="mb-10 mx-auto md:w-full rounded-md shadow-md bg-white {{ $hidden }}">
-        <form wire:submit.prevent="{{$wiresubmit}}" class=" grid p-6 justify-arround">
-            <h2 class="mb-10 text-lg font-semibold text-center">Tambah Data Merchant</h2>
-            <div class="mb-4 grid md:flex md:flex-wrap md:gap-3 justify-center w-full">
-                <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
-                <input id="namamerchant" wire:model.defer="namamerchant" type="text" placeholder="Masukkan Nama Merchant"
-                class="shadow mb-3 bg-[#e5e7eb] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full">
-                @error('namamerchant') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-
-                <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
-                <input id="deviceid" wire:model.defer="deviceid" type="text" placeholder="Masukkan Device ID"
-                class="shadow mb-3 bg-[#e5e7eb] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full">
-                @error('deviceid') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-
-                <input id="nopd" wire:model.defer="nopd" type="text" placeholder="Masukkan NOPD"
-                class="shadow mb-3 bg-[#e5e7eb] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full">
-                @error('nopd') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-                
-                <input id="almmerchant" wire:model.defer="almmerchant" type="text" placeholder="Masukkan Alamat Merchant"
-                class="shadow mb-3 bg-[#e5e7eb] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full"><br>
-                @error('almmerchant') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-            </div>
-            <button type="submit" class="justify-self-end bg-[#00bcd5] hover:bg-[#1a73e8] text-white font-bold py-2 px-10 rounded-xl">
-                Submit
-            </button>
-        </form>
-    </div>
-
-    <table class="my-5 mx-auto w-full rounded-md shadow-md bg-white {{$tablehidden}}">
+    <table class="p-5 my-5 mx-auto w-full rounded-sm shadow-md text-sm bg-white {{$tablehidden}}">
         <thead>
             <tr>
             <div class="w-full mt-10 py-5 px-3 flex justify-end align-middle gap-3  bg-white shadow-md rounded-md">
@@ -116,12 +88,11 @@
                             <input class="border-b-2 border-r-2 rounded-md" type="text" id="keyword" placeholder="Cari Data" wire:model.live.debounce.500="keyword">
     
 
-                        <div>
-                            <button wire:click.prevent="tambahData" class="bg-[#1a73e8] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Tambah Data</button>
-                            <button wire:click="modalImport()" class="bg-gray-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Import Data</button>
-                            <button wire:click="exportData()" class="bg-[#43a047] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Export Data</button>
-                        </div>
-
+                        
+                            <button wire:click.prevent="tambahData" class="bg-[#1a73e8] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Tambah</button>
+                            <button wire:click="modalImport()" class="bg-gray-700 w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Import</button>
+                            <button wire:click="exportData()" class="bg-[#43a047] w-fit px-4 py-2 text-white justify-self-end rounded-lg shadow-md">Export</button>
+                        
                     </div>
             </tr>
             <tr>
@@ -156,5 +127,37 @@
      <!-- Paginasi -->
      <div class="mt-4">
     {{ $datamerchants->links() }}
+    </div>
+    <div class="mb-10 mx-auto md:w-full rounded-md shadow-md bg-white {{ $hidden }}">
+        <form wire:submit.prevent="{{$wiresubmit}}" class=" grid p-6 justify-arround">
+            <h2 class="mb-10 text-lg font-semibold text-center">Tambah Data Merchant</h2>
+            <div class="mb-4 grid md:flex md:flex-wrap md:gap-3 justify-center w-full">
+                <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
+                <input id="namamerchant" wire:model.defer="namamerchant" type="text" placeholder="Masukkan Nama Merchant"
+                class="shadow mb-3 bg-[#eeeeee] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full">
+                @error('namamerchant') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
+
+                <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
+                <input id="deviceid" wire:model.defer="deviceid" type="text" placeholder="Masukkan Device ID"
+                class="shadow mb-3 bg-[#eeeeee] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full">
+                @error('deviceid') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
+
+                <input id="nopd" wire:model.defer="nopd" type="text" placeholder="Masukkan NOPD"
+                class="shadow mb-3 bg-[#eeeeee] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full">
+                @error('nopd') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
+                
+                <input id="almmerchant" wire:model.defer="almmerchant" type="text" placeholder="Masukkan Alamat Merchant"
+                class="shadow mb-3 bg-[#eeeeee] text-md appearance-none border-none rounded p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline w-full"><br>
+                @error('almmerchant') <br><p class="text-red-600 mb-4">{{ $message }}</p> @enderror
+            </div>
+            <div class="flex justify-end gap-5">
+                <button wire:click="kembali" class="justify-self-end bg-blue-600 text-white font-bold py-2 px-10 rounded-xl">
+                    Kembali
+                </button>
+                <button type="submit" class="justify-self-end bg-[#43a047] text-white font-bold py-2 px-10 rounded-xl">
+                    Submit
+                </button>
+            </div>
+        </form>
     </div>
 </div>

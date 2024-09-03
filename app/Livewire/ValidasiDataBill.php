@@ -160,4 +160,30 @@ class ValidasiDataBill extends Component
                 // Handle the exception and optionally log it
             }
     }
+    public function kembali(){
+    
+            try {
+                $regdata = Regs::find($this->regid);
+    
+                if ($regdata) {
+                    $regdata->update([
+                        'status_id' => '1',
+                        'keterangan' => $this->keterangan,
+                    ]);
+
+                    session()->flash('notification', [
+                        'message' => 'Berhasil Kembali',
+                        'type' => 'success',
+                        'open' => 'true'
+                    ]);
+                    $this->redirectRoute('regdatas');
+                    }
+                    
+                else {
+                    // Optionally, handle the case where the record is not found
+                }
+            } catch (\Exception $e) {
+                // Handle the exception and optionally log it
+            }
+    }
 }
