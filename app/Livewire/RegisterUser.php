@@ -20,8 +20,9 @@ class RegisterUser extends Component
     {
         $this->validate();
 
+
         // Hanya izinkan admin untuk mendaftar pengguna baru
-        if (!auth()->user()->is_admin) {
+        if (!auth()->user()->name==='admin') {
             abort(403, 'Unauthorized action.');
         }
 
@@ -33,7 +34,7 @@ class RegisterUser extends Component
 
         session()->flash('message', 'User registered successfully.');
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 
     public function render()
