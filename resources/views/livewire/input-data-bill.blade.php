@@ -2,11 +2,10 @@
 <div class="container-wrap align-middle p-5">
     <div class="p-5 bg-white max-w-fit mx-auto md:mt-5 place-items-center rounded-lg shadow-lg">
         <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1>
-
+        <x-loading/>
         <!-- Notification Handling -->
         
         @if (!empty($notification))
-        
         <div x-data="{ open: @entangle('open'), notificationType: @entangle('notificationType') }"
              x-show="open"
              x-transition:enter="transition ease-out duration-300"
