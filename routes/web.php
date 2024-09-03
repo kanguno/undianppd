@@ -7,6 +7,7 @@ use App\Livewire\ValidasiDataBill;
 use App\Livewire\RegDatas;
 use App\Livewire\Merchant;
 use App\Livewire\Dashboard;
+use App\Livewire\RegisterUser;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,12 +37,13 @@ Route::middleware([
         // })->name('dashboard');
         
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
-        Route::get('/register', function () {
-            return view('auth.register');
-        })->name('register.form');
+        // Route::get('/register', function () {
+        //     return view('auth.register');
+        // })->name('register.form');
 
         Route::get('/regdatas', RegDatas::class)->name('regdatas');
         Route::get('/merchants', Merchant::class)->name('merchants');
+        Route::get('/register', RegisterUser::class)->name('register.form');
         Route::get('/regdatas/{statusid}', RegDatas::class)->name('regdatastatus');
         Route::get('/validasidata/{regid}', ValidasiDataBill::class)->name('validasidata');
     });
