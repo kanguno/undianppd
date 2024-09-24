@@ -40,7 +40,8 @@ class ValidasiDataBill extends Component
             ->select(
                 'regs.*', 
                 'wp_datas.nm_wp as nm_wp',
-                'wp_datas.alm_wp as alm_wp',
+//                'wp_datas.alm_wp as alm_wp',
+		DB::raw('CONCAT("DS.",wp_datas.desa_wp,", RT.",wp_datas.rt_wp," RW.",wp_datas.rw_wp,", KEC.",wp_datas.kecamatan_wp,", ",wp_datas.daerah_wp,", ",wp_datas.provinsi_wp) as alm_wp'),
                 'wp_datas.no_hp as nohp',
                 'wp_datas.email as email', 
                 'merchants.nm_merchant as nm_merchant',
@@ -100,10 +101,22 @@ class ValidasiDataBill extends Component
                     }
                     $cekundian=Undians::where('reg_id','=',$this->regid)->first();
                     if(empty($cekundian)){
-                    Undians::create([
-                        'reg_id'=>$this->regid,
-                    ]);
 
+// Ambil nomor undian terakhir untuk penomoran berikutnya
+                        $lastUndian = Undians::orderBy('id', 'desc')->first();
+                        $nextNumber = $lastUndian ? $lastUndian->id + 1 : 1;
+        
+                        // Format nomor undian dengan leading zero (misalnya 6 digit)
+                        $formattedNumber = str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
+                        
+//                       dd($formattedNumber);
+                        // Simpan undian dengan nomor yang diformat
+                        Undians::create([
+                            'reg_id' => $this->regid,
+                            'no_undian' => $formattedNumber,
+                        ]);
+
+                   
                     session()->flash('notification', [
                         'message' => 'Berhasil Menyimpan Data',
                         'type' => 'success',
@@ -141,9 +154,16 @@ class ValidasiDataBill extends Component
     
                 if ($regdata) {
                     $regdata->update([
-                        'status_id' => '4',
+                        'status_tappingbox'=>null,
+			'tappingbox_id'=>null,
+			'status_id' => '4',
                         'keterangan' => $this->keterangan,
                     ]);
+
+		    $cekundian=Undians::where('reg_id','=',$this->regid)->first();
+                    if(!empty($cekundian)){
+                    $cekundian->delete();
+                    }
 
                     session()->flash('notification', [
                         'message' => 'Berhasil Menyimpan Data',

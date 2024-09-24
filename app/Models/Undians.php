@@ -9,5 +9,5 @@ class Undians extends Model
 {
     use HasFactory;
     protected $table = 'undians';
-    protected $fillable = ['reg_id','keterangan'];
+    protected $fillable = ['reg_id','no_undian'];
 }

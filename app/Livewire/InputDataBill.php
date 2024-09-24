@@ -18,7 +18,13 @@ class InputDataBill extends Component
     
     public $nik = '';
     public $nama = '';
-    public $alamat = '';
+    //public $alamat = '';
+    public $desa = '';
+    public $kecamatan = '';
+    public $rt = '';
+    public $rw = '';
+    public $daerah = '';
+    public $provinsi = '';
     public $nohp = '';
     public $email = '';
     public $pesan = ''; 
@@ -60,7 +66,12 @@ class InputDataBill extends Component
     public function rulesDataWp(){
         return[
             'nama'=>'required|string|max:255',
-            'alamat'=>'required|string|max:500',
+            'desa'=>'required|string|max:150',
+            'rt'=>'required|string|max:150',
+            'rw'=>'required|string|max:150',
+            'kecamatan'=>'required|string|max:150',
+            'daerah'=>'required|string|max:150',
+            'provinsi'=>'required|string|max:150',
             'nohp'=>'required|numeric',
             'email'=>'required|string|max:255',
             ];
@@ -81,7 +92,12 @@ class InputDataBill extends Component
                 'numeric' => 'Kolom isian harus berupa angka.',
                 'string' => 'Kolom isian harus berupa text.',
                 'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
-                'alamat.max' => 'Alamat tidak boleh lebih dari 500 karakter.',
+                'desa.max' => 'Desa tidak boleh lebih dari 150 karakter.',
+                'rt.max' => 'RT tidak boleh lebih dari 500 karakter.',
+                'rw.max' => 'RW tidak boleh lebih dari 150 karakter.',
+                'kecamatan.max' => 'Kecamatan tidak boleh lebih dari 150 karakter.',
+                'daerah.max' => 'Kabupaten / Kota tidak boleh lebih dari 150 karakter.',
+                'provinsi.max' => 'Provinsi tidak boleh lebih dari 150 karakter.',
                 'image' => 'File yang diupload harus berupa gambar',
                 'mimes' => 'File yang diupload harus format JPG/PNG/JPEG',
                 'photo.max' => 'Ukuran File yang diupload maksimal 1 MB',
@@ -131,7 +147,12 @@ class InputDataBill extends Component
     if($data){
         $this->isFound=true;
         $this->nama=$data->nm_wp;
-        $this->alamat=$data->alm_wp;
+        $this->desa=$data->desa_wp;
+        $this->rt=$data->rt_wp;
+        $this->rw=$data->rw_wp;
+        $this->kecamatan=$data->kecamatan_wp;
+        $this->daerah=$data->daerah_wp;
+        $this->provinsi=$data->provinsi_wp;
         $this->nohp=$data->no_hp;
         $this->email=$data->email;
         //$this->setNotification('Isikan Data Anda dan Data Transaksi Anda dengan Sesuai','info');
@@ -141,7 +162,7 @@ class InputDataBill extends Component
     }
     else{
         $this->isFound=false;
-        $this->pesan='NIK Tidak Terdaftar';
+        $this->pesan='NIK Belum Terdaftar sebagai peserta Gebyar Undian';
         $this->display='hidden';
         }
     }
@@ -156,7 +177,12 @@ class InputDataBill extends Component
         $this->showmessage=false;
         $this->formstatus=1;
         $this->nama=$this->maskData($this->nama);
-        $this->alamat=$this->maskData($this->alamat);
+        $this->desa=$this->maskData($this->desa);
+        $this->rt=$this->maskData($this->rt);
+        $this->rw=$this->maskData($this->rw);
+        $this->kecamatan=$this->maskData($this->kecamatan);
+        $this->daerah=$this->maskData($this->daerah);
+        $this->provinsi=$this->maskData($this->provinsi);
         $this->nohp=$this->maskData($this->nohp);
         $this->email=$this->maskData($this->email);
         $this->readonly="readonly";
@@ -165,19 +191,27 @@ class InputDataBill extends Component
     public function regSave(){
         
         $nik=$this->nik;
-        
-
         $data=wpdatas::where('nik',$this->nik)->first();
         if(empty($data)){
         $nama=Str::upper($this->nama);
-        $alamat=Str::upper($this->alamat);
+        $desa=Str::upper($this->desa);
+        $rt=Str::upper($this->rt);
+        $rw=Str::upper($this->rw);
+        $kecamatan=Str::upper($this->kecamatan);
+        $daerah=Str::upper($this->daerah);
+        $provinsi=Str::upper($this->provinsi);
         $nohp=Str::upper($this->nohp);
         $email=Str::upper($this->email);
         $this->validate($this->rulesDataWp());
             wpdatas::create([
                 'nik' => $nik,
                 'nm_wp' => $nama,
-                'alm_wp' => $alamat,
+                'desa_wp' => $desa,
+                'rt_wp' => $rt,
+                'rw_wp' => $rw,
+                'kecamatan_wp' => $kecamatan,
+                'daerah_wp' => $daerah,
+                'provinsi_wp' => $provinsi,
                 'no_hp' => $nohp,
                 'email' => $email,
             ]);

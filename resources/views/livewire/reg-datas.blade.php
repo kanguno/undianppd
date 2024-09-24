@@ -109,6 +109,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+				
                                 @forelse($dataregs as $index => $reg)
                                 <tr class="border-2">
                                         <td class="border-b-2 px-4 py-2 text-center">{{ $index + 1 + ($dataregs->currentPage() - 1) * $dataregs->perPage() }}</td>
@@ -132,12 +133,29 @@
                                             @elseif($statusid=='3')
                                             <td class="border-b-2 px-4 py-2 text-center">{{ $reg->no_undian }}</td>
                                             <td class="border-b-2 px-4 py-2 text-center">
-                                                <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-[#43a047] text-white rounded-md">Kirim</a>
+                                                <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')"
+						
+						 @if($reg->status_kirim===1)
+						 class="btn py-1 px-2 bg-blue-600 text-white rounded-md"> 
+                                                Kirim Ulang
+                                                @else
+						class="btn py-1 px-2 bg-[#43a047] text-white rounded-md">
+                                                Kirim
+                                                @endif
+						</a>
                                             </td>
                                             @elseif($statusid=='4')
                                             <td class="border-b-2 px-4 py-2 text-center">{{ $reg->keterangan }}</td>
                                             <td class="border-b-2 px-4 py-2 text-center">
-                                                <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')" class="btn py-1 px-2 bg-[#43a047] text-white rounded-md">Kirim</a>
+                                                <a wire:click="KirimData({{ $reg->id }}, '{{ $reg->status_id }}')"
+						 @if($reg->status_kirim===1)
+                                                 class="btn py-1 px-2 bg-blue-600 text-white rounded-md">
+                                               	 Kirim Ulang
+                                               	 @else
+                                               	 class="btn py-1 px-2 bg-[#43a047] text-white rounded-md">
+                                               	 Kirim {{$reg->status_kirim}}
+                                               	 @endif
+						</a>
                                             </td>
                                             @endif
                                             @if(Auth::user()->name =='admin')

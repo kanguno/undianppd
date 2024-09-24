@@ -42,6 +42,7 @@ class Merchant extends Component
         $keyword=$this->keyword;
         $datamerchants=Merchants::where('merchants.id', 'like', '%' . $keyword . '%')
         ->orWhere('merchants.nm_merchant', 'like', '%' . $keyword . '%')
+	->orWhere('merchants.device_id', 'like','%'.$keyword.'%')
         ->orderBy($koldata)
         ->paginate($jmldata);
 
@@ -91,7 +92,7 @@ class Merchant extends Component
     public function editData($id){
         $this->hidden='';
         $this->tablehidden='hidden';
-        $this->wiresubmit="updateData";
+        $this->wiresubmit="updateData(".$id.")";
         $data=Merchants::where('id',$id)->first();
         $this->id=$data->id;
         $this->namamerchant=$data->nm_merchant;
@@ -132,10 +133,11 @@ class Merchant extends Component
             return redirect()->route('merchants');
         }
     }
-    public function updateData(){
+    public function updateData($id){
         
-        $data=Merchants::where('nopd',$this->nopd)->first();
-        
+//	dd($id);
+        $data=Merchants::where('id',$id)->first();
+//  dd($data);      
         if(!empty($data)){
         $namamerchant=Str::upper($this->namamerchant);
         $deviceid=Str::upper($this->deviceid);

@@ -35,13 +35,15 @@ class RegDatas extends Component
       ->leftJoin('merchants', 'regs.merchant_id', '=', 'merchants.id')
       ->join('statuses', 'regs.status_id', '=', 'statuses.id')
       ->leftJoin('undians', 'regs.id', '=', 'undians.reg_id')
+      ->leftJoin('sendstatus','regs.id','=','sendstatus.reg_id')
       ->select(
           'regs.*', 
           'wp_datas.nm_wp as nm_wp',
           'wp_datas.no_hp as no_hp', 
           'merchants.nm_merchant as nm_merchant',
           'statuses.reg_status',
-          'undians.id as no_undian'
+          'undians.no_undian as no_undian',
+	  'sendstatus.status_kirim as status_kirim'
       );
   
   // Terapkan pencarian kata kunci
@@ -58,15 +60,25 @@ class RegDatas extends Component
   if($statusid!='0'){
   
   if ($statusid === '1' || $statusid === '2') {
+
       $query->where('regs.status_id', '<', 3);
+//	->orderBy('status_kirim','asc')
+//	->orderBy('no_undian','asc');
   }
   else {
-      $query->where('regs.status_id', '=', $statusid);
+//	$koldata="no_undian";
+        $query->where('regs.status_id', '=', $statusid)
+	->orderBy('status_kirim','asc')
+	->orderBy('no_undian','asc');
   }
 }
   
   // Urutkan dan paginasi
-  $dataregs = $query->orderBy($koldata)->paginate($jmldata);
+//$koldata=$this->koldata;
+  $dataregs = $query
+// 		 ->orderBy('status_kirim','asc')
+//		 ->orderBy('no_undian','asc')
+	 	 ->orderBy($koldata)->paginate($jmldata);
   
   // Kirim data ke view
   return view('livewire.reg-datas', ['dataregs' => $dataregs]);
@@ -117,19 +129,43 @@ class RegDatas extends Component
         $query = DB::table('regs')
         ->leftJoin('wp_datas', 'regs.nik', '=', 'wp_datas.nik')
         ->leftJoin('undians', 'regs.id', '=', 'undians.reg_id')
-        ->select('regs.*', 'wp_datas.nm_wp as nm_wp', 'wp_datas.no_hp as no_hp', 'undians.id as no_undian')
+	->leftJoin('merchants','regs.merchant_id','=','merchants.id')
+        ->select('regs.*', 'wp_datas.nm_wp as nm_wp', 'wp_datas.no_hp as no_hp', 'undians.id as undian_id','undians.no_undian as no_undian','merchants.nm_merchant as nm_merchant')
         ->where('regs.id', '=', $regid)
         ->first(); // Menambahkan first() untuk mendapatkan hasil query
 
     $nohp='62'.substr($query->no_hp, 1);
     if($statusid==='3'){
-    $pesan='Hallo *'.$query->nm_wp.'* Selamat Anda Terdaftar sebagai peserta Gebyar Undian Pajak Daerah Tuban 2024 dengan nomor undian *'.$query->no_undian.'*';
+    $pesan='Hallo *'.$query->nm_wp.'* Selamat Anda Terdaftar sebagai peserta Gebyar Undian Pajak Daerah Tuban 2024 dengan nomor undian *'.$query->no_undian.'* dengan data transaksi di '.$query->nm_merchant.' pada tanggal '.$query->tgl_bill;
     }
     elseif($statusid==='4'){
-    $pesan='Hallo *'.$query->nm_wp.'* Mohon maaf, permohonan undian anda kami tolak karena *'.$query->keterangan.'*';
+    $pesan='Hallo *'.$query->nm_wp.'* Mohon maaf, permohonan undian anda pada transaksi di '.$query->nm_merchant.' pada tanggal '.$query->tgl_bill.', kami tolak karena *'.$query->keterangan.'*';
     }
     $pesan=str_replace(' ', '%20', $pesan);
     
+	$existingStatus = DB::table('sendstatus')
+    ->where('reg_id', $regid)
+    ->first(); // Mengambil baris pertama yang cocok atau null jika tidak ada
+
+
+    // dd($sendstatus);
+
+    if ($existingStatus) {
+        // Jika data ada, lakukan update
+        DB::table('sendstatus')
+            ->where('reg_id', $regid)
+            ->update(['status_kirim' => 1]);
+    } else {
+        // Jika data tidak ada, lakukan insert
+        DB::table('sendstatus')
+            ->insert([
+                'reg_id' => $regid,
+                'status_kirim' => 1
+            ]);
+    }
+    
+
+
     $url = 'https://web.whatsapp.com/send?phone='.$nohp.'&text='.$pesan; // URL yang benar
     \Log::info('Redirecting to URL:', ['url' => $url]); // Log URL
     $this->dispatch('redirect', url:$url);

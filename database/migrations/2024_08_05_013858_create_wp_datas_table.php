@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('wp_datas', function (Blueprint $table) {
             $table->unsignedBigInteger('nik')->primary();
             $table->string('nm_wp',100);
-            $table->string('alm_wp',150);
+//            $table->string('alm_wp',150);
+	    $table->string('desa_wp',150);
+            $table->string('rt_wp',150);
+            $table->string('rw_wp',150);
+            $table->string('kecamatan_wp',150);
+            $table->string('daerah_wp',150);
+            $table->string('provinsi_wp',150);
             $table->string('no_hp',20);
             $table->string('email',50);
             $table->date('created_at');

@@ -1,8 +1,7 @@
-
 <!-- resources/views/livewire/input-data-bill.blade.php -->
 <div class="container-wrap align-middle p-5">
     <div class="p-5 bg-white max-w-fit mx-auto md:mt-5 place-items-center rounded-lg shadow-lg">
-<!--        <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1> -->
+        <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1>
         <x-loading/>
         <!-- Notification Handling -->
         
@@ -39,8 +38,8 @@
         <!-- NIK Check Form -->
         <form wire:submit.prevent="ceknik" class="{{ $display }} grid">
             <div class="mb-4">
-		 <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK (Nomor Induk Kependudukan) <b class="text-red-600">*</b></label>               
-                <input id="nik" wire:model.defer="nik" type="text" placeholder="3523xxxxxxxxxxxx"
+                <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
+                <input id="nik" wire:model.defer="nik" type="text" placeholder=""
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full md:min-w-[400px] p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
             @error('nik') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
@@ -58,7 +57,7 @@
                 <br>Apakah anda akan menggunakan data ini?
             </div>
             <div class="flex gap-4 justify-end my-5">
-                <button onclick="window.location.reload();" class="bg-slate-500 hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
+                <button onclick="window.location.reload();" class="bg-slate-500 3523hover:bg-gray-700 text-white py-2 px-4 rounded-lg">
                     Kembali</button>
                 <button class="ml-4 bg-[#00bcd5] hover:bg-[#1a73e8] text-white px-4 py-2 rounded-lg" wire:click="tambahreg">
                     Lanjutkan</button>
@@ -81,12 +80,8 @@
         <!-- Additional Data Form -->
         @if ($formstatus == 1)
         <form wire:submit.prevent="regSave">
-
-        <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1>
-
             <div class="mb-4">
-                <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK (Nomor Induk Kependudukan) <b class="text-red-600">*</b></label>
-		 <!-- <label for="nik-display" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
+                <!-- <label for="nik-display" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
                 <input id="nik-display" type="text" value="{{ $nik }}" readonly
                 class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
@@ -171,7 +166,7 @@
             <div class="mb-4">
                 <label for="tglbill" class="block text-gray-700 text-sm font-bold mb-2">Tanggal Transaksi (Tanggal yang Tercatat di Bill/Struk) <b class="text-red-600">*</b></label>
                 <input wire:model.defer="tglbill" type="date" id="tglbill" name="tglbill"
-                       min="2024-08-17" max="2024-11-30"
+                       min="2024-08-17" max="2024-10-30"
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('tglbill') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
@@ -179,13 +174,13 @@
             <div class="mb-4">
                 <label for="jambill" class="block text-gray-700 text-sm font-bold mb-2">Jam Transaksi Tanggal Transaksi (Jam yang Tercatat di Bill/Struk) <b class="text-red-600">*</b></label>
                 <input wire:model.defer="jambill" type="time" id="jambill" name="jambill"
-                       min="00:00:00" max="24:59:59" step="1"
+                       min="00:00:00" max="24:59:59" step="2"
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('jambill') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
-                <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Foto Bill/Struk (Ukuran Maks 1 MB dengan format JPG|JPEG|PNG. Setelah Upload Mohon Tunggu Sampai Foto Ditampilkan) <b class="text-red-600">*</b></label>
+                <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Foto Bill/Struk (Setelah Upload Mohon Tunggu Sampai Foto Ditampilkan) <b class="text-red-600">*</b></label>
                 <input type="file" id="photo" wire:model="photo" accept="image/*"
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('photo') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror

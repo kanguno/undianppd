@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('undians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('reg_id')->constrained()->onDelete('cascade');
-            $table->string('keterangan',150)->nullable();
+            $table->string('no_undian',10);
             $table->date('created_at');
             $table->date('updated_at');
         });

@@ -1,8 +1,7 @@
-
 <!-- resources/views/livewire/input-data-bill.blade.php -->
 <div class="container-wrap align-middle p-5">
     <div class="p-5 bg-white max-w-fit mx-auto md:mt-5 place-items-center rounded-lg shadow-lg">
-<!--        <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1> -->
+        <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1>
         <x-loading/>
         <!-- Notification Handling -->
         
@@ -39,9 +38,9 @@
         <!-- NIK Check Form -->
         <form wire:submit.prevent="ceknik" class="{{ $display }} grid">
             <div class="mb-4">
-		 <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK (Nomor Induk Kependudukan) <b class="text-red-600">*</b></label>               
-                <input id="nik" wire:model.defer="nik" type="text" placeholder="3523xxxxxxxxxxxx"
-                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full md:min-w-[400px] p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
+                <!-- <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
+                <input id="nik" wire:model.defer="nik" type="text" placeholder="Masukkan NIK (Nomor Induk Kependudukan) Anda"
+                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
             @error('nik') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             <button type="submit" class="justify-self-center bg-[#00bcd5] hover:bg-[#1a73e8] text-white font-bold py-2 px-10 rounded-xl">
@@ -81,60 +80,25 @@
         <!-- Additional Data Form -->
         @if ($formstatus == 1)
         <form wire:submit.prevent="regSave">
-
-        <h1 class="text-center text-gray-700 text-xl font-bold mb-4">Massukkan Data Anda</h1>
-
             <div class="mb-4">
-                <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK (Nomor Induk Kependudukan) <b class="text-red-600">*</b></label>
-		 <!-- <label for="nik-display" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
+                <!-- <label for="nik-display" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> -->
                 <input id="nik-display" type="text" value="{{ $nik }}" readonly
                 class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-neutral-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
 
             <div class="mb-4">
-                <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap <b class="text-red-600">*</b></label>
-                <input id="nama" type="text" placeholder="Masukkan Nama Lengkap Anda" wire:model.defer="nama" {{ $readonly }}
+                <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama <b class="text-red-600">*</b></label>
+                <input id="nama" type="text" placeholder="Masukkan Nama Anda" wire:model.defer="nama" {{ $readonly }}
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
 
             <div class="mb-4">
-                <label for="desa" class="block text-gray-700 text-sm font-bold mb-2">Desa <b class="text-red-600">*</b></label>
-                <input id="desa" type="text" placeholder="Masukkan Desa Anda" wire:model.defer="desa" {{ $readonly }}
+                <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat <b class="text-red-600">*</b></label>
+                <input id="alamat" type="text" placeholder="Masukkan Alamat Anda" wire:model.defer="alamat" {{ $readonly }}
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('desa') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
+                @error('alamat') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
-            <div class="flex mb-4 justify-start gap-10">
-                <div>
-                    <label for="rt" class="block text-gray-700 text-sm font-bold mb-2">RT<b class="text-red-600">*</b></label>
-                    <input id="rt" type="text" placeholder="RT" wire:model.defer="rt" {{ $readonly }}
-                    class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    @error('rt') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-                </div>
-                <div>
-                    <label for="rw" class="block text-gray-700 text-sm font-bold mb-2">RW<b class="text-red-600">*</b></label>
-                    <input id="rw" type="text" placeholder="RW" wire:model.defer="rw" {{ $readonly }}
-                    class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    @error('rw') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="kecamatan" class="block text-gray-700 text-sm font-bold mb-2">Kecamatan<b class="text-red-600">*</b></label>
-                <input id="kecamatan" type="text" placeholder="Masukkan Kecamatan Anda" wire:model.defer="kecamatan" {{ $readonly }}
-                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('kecamatan') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-            </div>
-            <div class="mb-4">
-                <label for="daerah" class="block text-gray-700 text-sm font-bold mb-2">Kabupaten / Kota<b class="text-red-600">*</b></label>
-                <input id="daerah" type="text" placeholder="Masukkan Kabupaten / Kota Anda" wire:model.defer="daerah" {{ $readonly }}
-                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('daerah') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-            </div>
-            <div class="mb-4">
-                <label for="provinsi" class="block text-gray-700 text-sm font-bold mb-2">Provinsi<b class="text-red-600">*</b></label>
-                <input id="provinsi" type="text" placeholder="Masukkan Provinsi Anda" wire:model.defer="provinsi" {{ $readonly }}
-                       class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('provinsi') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
-            </div>
+
             <div class="mb-4">
                 <label for="nohp" class="block text-gray-700 text-sm font-bold mb-2">No HP (WA) <b class="text-red-600">*</b></label>
                 <input id="nohp" type="text" placeholder="Masukkan No Handphone (WA) Anda" wire:model.defer="nohp" {{ $readonly }}
@@ -171,7 +135,7 @@
             <div class="mb-4">
                 <label for="tglbill" class="block text-gray-700 text-sm font-bold mb-2">Tanggal Transaksi (Tanggal yang Tercatat di Bill/Struk) <b class="text-red-600">*</b></label>
                 <input wire:model.defer="tglbill" type="date" id="tglbill" name="tglbill"
-                       min="2024-08-17" max="2024-11-30"
+                       min="2024-08-17" max="2024-10-30"
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('tglbill') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
@@ -179,13 +143,13 @@
             <div class="mb-4">
                 <label for="jambill" class="block text-gray-700 text-sm font-bold mb-2">Jam Transaksi Tanggal Transaksi (Jam yang Tercatat di Bill/Struk) <b class="text-red-600">*</b></label>
                 <input wire:model.defer="jambill" type="time" id="jambill" name="jambill"
-                       min="00:00:00" max="24:59:59" step="1"
+                       min="00:00:00" max="24:59:59" step="2"
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('jambill') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
             </div>
 
             <div class="mb-4">
-                <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Foto Bill/Struk (Ukuran Maks 1 MB dengan format JPG|JPEG|PNG. Setelah Upload Mohon Tunggu Sampai Foto Ditampilkan) <b class="text-red-600">*</b></label>
+                <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Foto Bill/Struk (Ukuran Maks 1 MB, Setelah Upload Mohon Tunggu Sampai Foto Ditampilkan) <b class="text-red-600">*</b></label>
                 <input type="file" id="photo" wire:model="photo" accept="image/*"
                        class="shadow bg-[#eeeeee] text-md appearance-none border-none rounded w-full p-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 @error('photo') <p class="text-red-600 mb-4">{{ $message }}</p> @enderror
