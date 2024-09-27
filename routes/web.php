@@ -8,6 +8,8 @@ use App\Livewire\RegDatas;
 use App\Livewire\Merchant;
 use App\Livewire\Dashboard;
 use App\Livewire\RegisterUser;
+use App\Livewire\Drawundian;
+use App\Livewire\Pengundian;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +29,7 @@ Route::get('/inputdata', InputDataBill::class)->name('inputDataBill');
 
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -40,7 +43,8 @@ Route::middleware([
         // Route::get('/register', function () {
         //     return view('auth.register');
         // })->name('register.form');
-
+        Route::get('/draw', Drawundian::class)->name('drawundian');
+        Route::get('/pengundian', Pengundian::class)->name('pengundian');
         Route::get('/regdatas', RegDatas::class)->name('regdatas');
         Route::get('/merchants', Merchant::class)->name('merchants');
         Route::get('/register', RegisterUser::class)->name('register.form');
