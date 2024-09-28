@@ -29,29 +29,37 @@ class Pengundian extends Component
     public function undiPemenang()
     {
         $this->resetWinners();
-        
+
         // Ambil peserta
         $nominasi = DB::table('undians')
             ->leftJoin('regs', 'undians.reg_id', '=', 'regs.id')
             ->leftJoin('wp_datas', 'regs.nik', '=', 'wp_datas.nik')
-            ->select('undians.no_undian', 'wp_datas.nm_wp')
+            ->select('undians.id','undians.no_undian', 'wp_datas.nm_wp', 'wp_datas.nik')
             ->get();
 
         if ($nominasi->isEmpty()) {
             session()->flash('error', 'Belum ada peserta yang mendaftar.');
             return;
         }
+
+        // Ambil semua nik yang sudah ada di tabel pemenangs
+        $dataPemenang = DB::table('pemenangs')->pluck('nik')->toArray();
         
         // Acak pemenang
-        $this->randomPemenang($nominasi);
+        $this->selectMultipleWinners($nominasi, $this->hadiah, $dataPemenang);
+        $this->finishDraw = true;
     }
 
-    private function randomPemenang($nominasi)
+    private function selectMultipleWinners($nominasi, $count, $dataPemenang)
     {
+        $winners = [];
+        $winnerSet = [];
+
+
         for ($i = 0; $i < 50; $i++) {
             // Mengacak pemenang
             for ($j = 1; $j <= $this->hadiah; $j++) {
-                $winner = $nominasi->random();
+                $winner = $nominasi->shuffle()->random();
 
                 // Update nomor dan nama pemenang di Livewire stream
                 $this->stream(to: "winner{$j}no", content: $this->{"winner{$j}no"} = $winner->no_undian, replace: true);
@@ -60,20 +68,37 @@ class Pengundian extends Component
             
             usleep(100000); // Jeda 100ms untuk efek visual
         }
-        
-        // Ambil pemenang unik setelah pengacakan
-        $this->selectMultipleWinners($nominasi);
-    }
 
-    private function selectMultipleWinners($nominasi)
-    {
-        $this->winners = $nominasi->shuffle()->take($this->hadiah)->toArray();
         
-        // Mengisi informasi pemenang ke dalam properti
-        foreach ($this->winners as $index => $winner) {
+
+
+        while (count($winners) < $count && count($winners) < $nominasi->count()) {
+            $winner = $nominasi->shuffle()->random();
+            // dd($winner);
+
+            // Cek apakah nik sudah terdaftar atau sudah ada di pemenang
+            if (!isset($winnerSet[$winner->nik]) && !in_array($winner->nik, $dataPemenang)) {
+                $winners[] = $winner;
+                $winnerSet[$winner->nik] = true; // Track unique winners
+
+                Pemenang::create([
+                    'id_undian' => $winner->id,
+                    'nik' => $winner->nik,
+                    'no_undian' => $winner->no_undian,
+                    'nama' => $winner->nm_wp,
+                    // Tambahkan kolom lain sesuai kebutuhan
+                ]);
+            }
+            
+        }
+
+        
+
+        // Assign winners to properties
+        foreach ($winners as $index => $winner) {
             if ($index < 5) {
-                $this->{'winner' . ($index + 1) . 'no'} = $winner->no_undian;
-                $this->{'winner' . ($index + 1) . 'name'} = $winner->nm_wp;
+                $this->{'winner' . ($index + 1) . 'no'} = $winner->no_undian ?? '';
+                $this->{'winner' . ($index + 1) . 'name'} = $winner->nm_wp ?? '';
             }
         }
     }

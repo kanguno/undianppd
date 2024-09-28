@@ -71,11 +71,5 @@
         });
     }
 
-
-    window.addEventListener('start-drawing', function() {
-        setInterval(() => {
-            @this.call('updateRandomNomor');
-        }, 100); // Update nomor setiap 1 detik
-    });
 </script>
 
